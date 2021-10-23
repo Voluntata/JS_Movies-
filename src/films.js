@@ -95,32 +95,31 @@ function moviesAverageByCategory(array, category) {
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
-  const result = array.filter(item => {
-
-    //obtiene duration y convierte a un array
-    let itemDuration = item.duration.split(' ');
-
-    let horas;
-    let minutos;
-    //para cada elemento de duration elimina 'h' y 'min
-    itemDuration.map(e => {
-      if (e.includes('h')) {
-        horas = parseInt(e.replace('h', '')) * 60;
+  function stringToNumber(string) {
+//function para convertir formato 'xh ymin' a numero
+    let result = string.split(' ').map(e => {
+      if (e.includes('h')) { //borra h, saca el numero y multiplica a 60
+        horas = parseInt(e.split(-1)) * 60;
         minutos = 0;
       }
-      else if (e.includes('min')) {
-        minutos = parseInt(e.replace('min', ''));
-        horas = horas;
-      }
-      //calcula duracion en minutos 
-      let newItemDuration = parseInt(minutos) + parseInt(horas);
-      console.log(newItemDuration);
-      //reemplaza valor de duration
-      item.duration = newItemDuration;
-    })
+      else if (e.includes('min')) { //borra min, saca el numero 
+        minutos = parseInt(e.split([-1, -3]));
+        horas = 0;
+      } // devuelve array de horas y minutos en numeros
+      return parseInt(minutos) + parseInt(horas);
+    });
+   //suma horas y minutos y devuelva minutos
+    return result.reduce((a, b) => a + b);
+  }
+  newArray = array.map(a => Object.assign({}, a));//crear copia de array
+ 
+  result = newArray.map(item => {
+    item.duration = stringToNumber(item.duration); // cambiar valor de duracion
 
     return item;
-  });
+  })
+
+
   console.log("EXERCICE 7 ->", result);
   return result;
 }
@@ -133,11 +132,11 @@ function bestFilmOfYear(array, year) {
       return pelicula.year;
     }
   });
-//obtener la score maxima del array filtrado
+  //obtener la score maxima del array filtrado
   let score = newArray.reduce(function (a, b) {
     return Math.max(a, b.score);
   }, 0);
-//mostrar la pelicula que tiene score maxima
+  //mostrar la pelicula que tiene score maxima
   let result = newArray.filter(function (item) {
     if (item.score === score) {
       return item

@@ -1,7 +1,7 @@
 // Exercise 1: Get the array of all directors.
 function getAllDirectors(movies) {
-  let result = movies.map(item => {
-    return item.director;
+  let result = movies.map(pelicula => {
+    return pelicula.director;
   });
   console.log("EXERCICE 1 ->", result);
   return result;
@@ -9,7 +9,7 @@ function getAllDirectors(movies) {
 
 // Exercise 2: Get the films of a certain director
 function getMoviesFromDirector(array, director) {
-  let result = array.filter(function (pelicula) {
+  let result = array.filter( pelicula => {
     if (pelicula.director == director) {
       return pelicula.title;
     }
@@ -21,7 +21,7 @@ function getMoviesFromDirector(array, director) {
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
   //filtrar array por  director
-  let newArray = array.filter(function (pelicula) {
+  let newArray = array.filter(pelicula =>{
     if (pelicula.director == director) {
       return pelicula.title
     }
@@ -68,7 +68,7 @@ function orderByYear(array) {
 
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory(array, category) {
-  let newArray = array.filter(function (pelicula) {
+  let newArray = array.filter(pelicula => {
     if (pelicula.genre.includes(category)) { //filtrar array por genero, usar includes porque hay maas de un genero
       return pelicula.genre
     }
@@ -127,17 +127,17 @@ function hoursToMinutes(array) {
 // Exercise 8: Get the best film of a year
 function bestFilmOfYear(array, year) {
   //filtrar el array por año
-  const newArray = array.filter(function (pelicula) {
+  const newArray = array.filter(pelicula => {
     if (year === pelicula.year) {
       return pelicula.year;
     }
   });
   //obtener la score maxima del array filtrado
-  let score = newArray.reduce(function (a, b) {
+  let score = newArray.reduce( (a, b) => {
     return Math.max(a, b.score);
   }, 0);
   //mostrar la pelicula que tiene score maxima
-  let result = newArray.filter(function (item) {
+  let result = newArray.filter(item => {
     if (item.score === score) {
       return item
     }

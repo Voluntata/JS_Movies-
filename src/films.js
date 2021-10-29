@@ -9,24 +9,41 @@ function getAllDirectors(movies) {
 
 // Exercise 2: Get the films of a certain director
 function getMoviesFromDirector(array, director) {
-  let result = array.filter( pelicula => 
+  let result = array.filter(pelicula =>
     pelicula.director == director)
- 
+
   console.log("EXERCICE 2 ->", result);
   return result;
 }
 
 // Exercise 3: Calculate the average of the films of a given director.
+// function moviesAverageOfDirector(array, director) {
+//   //filtrar array por  director
+//   let result = array.filter( pelicula => 
+//     pelicula.director === director)
+//   //crear array de score
+//   let score = newArray.map(item => {
+//     return item.score
+//   })
+//   //calcular score media por director
+//   let result = score.reduce((score1, score2) => (score1 + score2) / score.length);
+
+//   console.log("EXERCICE 3 ->", director, Math.floor(result * 100) / 100);
+//   return Math.floor(result * 100) / 100;
+// }
+
+
 function moviesAverageOfDirector(array, director) {
-  //filtrar array por  director
-  let result = array.filter( pelicula => 
-    pelicula.director == director)
-  //crear array de score
-  let score = newArray.map(item => {
-    return item.score
-  })
-  //calcular score media por director
-  let result = score.reduce((score1, score2) => (score1 + score2) / score.length);
+ // filtrar array por  director
+ let newArray = array.filter( pelicula => 
+  pelicula.director === director)
+//crear array de score
+let score = newArray.map(item => {
+  return item.score
+})
+//calcular score media por director
+let result = score.reduce((score1, score2) => (score1 + score2) / score.length);
+
 
   console.log("EXERCICE 3 ->", director, Math.floor(result * 100) / 100);
   return Math.floor(result * 100) / 100;
@@ -91,7 +108,7 @@ function moviesAverageByCategory(array, category) {
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
   function stringToNumber(string) {
-//function para convertir formato 'xh ymin' a numero
+    //function para convertir formato 'xh ymin' a numero
     let result = string.split(' ').map(e => {
       if (e.includes('h')) { //borra h, saca el numero y multiplica a 60
         horas = parseInt(e.split(-1)) * 60;
@@ -103,11 +120,11 @@ function hoursToMinutes(array) {
       } // devuelve array de horas y minutos en numeros
       return parseInt(minutos) + parseInt(horas);
     });
-   //suma horas y minutos y devuelva minutos
+    //suma horas y minutos y devuelva minutos
     return result.reduce((a, b) => a + b);
   }
   newArray = array.map(a => Object.assign({}, a));//crear copia de array
- 
+
   result = newArray.map(item => {
     item.duration = stringToNumber(item.duration); // cambiar valor de duracion
 
@@ -128,7 +145,7 @@ function bestFilmOfYear(array, year) {
     }
   });
   //obtener la score maxima del array filtrado
-  let score = newArray.reduce( (a, b) => {
+  let score = newArray.reduce((a, b) => {
     return Math.max(a, b.score);
   }, 0);
   //mostrar la pelicula que tiene score maxima
